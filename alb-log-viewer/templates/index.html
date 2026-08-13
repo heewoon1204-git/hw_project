@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        ALB Log Viewer
+    </title>
+
+
+    <style>
+
+        body {
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            margin: 40px;
+
+            background: #f5f6f8;
+
+            color: #222;
+
+        }
+
+
+        h1 {
+
+            margin-bottom: 5px;
+
+        }
+
+
+        /* ==================================================
+           Latest Log
+        ================================================== */
+
+        .latest-log {
+
+            background: white;
+
+            padding: 18px 20px;
+
+            margin-bottom: 25px;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 2px 6px
+                rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        .latest-title {
+
+            font-size: 14px;
+
+            color: #666;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .latest-time {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+        }
+
+
+        .latest-type {
+
+            margin-top: 5px;
+
+            font-size: 13px;
+
+            color: #888;
+
+        }
+
+
+        /* ==================================================
+           Summary
+        ================================================== */
+
+        .summary {
+
+            display: flex;
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .card {
+
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            min-width: 120px;
+
+            box-shadow:
+                0 2px 6px
+                rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        .card-title {
+
+            font-size: 14px;
+
+            color: #666;
+
+        }
+
+
+        .card-value {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            margin-top: 8px;
+
+        }
+
+
+        /* ==================================================
+           Filters
+        ================================================== */
+
+        .filters {
+
+            background: white;
+
+            padding: 20px;
+
+            margin-bottom: 10px;
+
+            border-radius: 10px;
+
+        }
+
+
+        .filters form {
+
+            display: flex;
+
+            gap: 10px;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .filters select,
+        .filters input {
+
+            padding: 10px;
+
+            border:
+                1px solid #ccc;
+
+            border-radius: 6px;
+
+            font-size: 14px;
+
+        }
+
+
+        .filters input[type="text"] {
+
+            width: 280px;
+
+        }
+
+
+        .filters button {
+
+            padding:
+                10px 18px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            background: #222;
+
+            color: white;
+
+        }
+
+
+        .filters button:hover {
+
+            background: #444;
+
+        }
+
+
+        .filters a {
+
+            padding: 10px;
+
+            color: #555;
+
+            text-decoration: none;
+
+        }
+
+
+        /* ==================================================
+           Mode Buttons
+        ================================================== */
+
+        .filter-mode {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .filter-mode button {
+
+            padding:
+                9px 16px;
+
+            border-radius: 6px;
+
+            border:
+                1px solid #ddd;
+
+            color: #555;
+
+            background: #fafafa;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+        }
+
+
+        .filter-mode button:hover {
+
+            background: #eee;
+
+        }
+
+
+        .filter-mode button.active {
+
+            background: #222;
+
+            color: white;
+
+            border-color: #222;
+
+        }
+
+
+        /* ==================================================
+           Custom Date
+        ================================================== */
+
+        .custom-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .custom-label {
+
+            font-size: 14px;
+
+            color: #666;
+
+            min-width: 40px;
+
+        }
+
+
+        .timezone-info {
+
+            margin-top: 10px;
+
+            font-size: 12px;
+
+            color: #888;
+
+        }
+
+
+        .error-message {
+
+            margin-top: 12px;
+
+            padding: 10px;
+
+            border-radius: 6px;
+
+            background: #fff1f1;
+
+            color: #c62828;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ==================================================
+           Result
+        ================================================== */
+
+        .result-count {
+
+            margin:
+                15px 0;
+
+            color: #666;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ==================================================
+           Table
+        ================================================== */
+
+        .table-container {
+
+            overflow-x: auto;
+
+            background: white;
+
+            border-radius: 10px;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: white;
+
+        }
+
+
+        th {
+
+            background: #222;
+
+            color: white;
+
+            padding: 12px;
+
+            text-align: left;
+
+            white-space: nowrap;
+
+        }
+
+
+        td {
+
+            padding: 10px;
+
+            border-bottom:
+                1px solid #ddd;
+
+            font-size: 14px;
+
+        }
+
+
+        tbody tr:hover {
+
+            background: #f7f7f7;
+
+        }
+
+
+        /* ==================================================
+           Status
+        ================================================== */
+
+        .status-2xx {
+
+            color: green;
+
+            font-weight: bold;
+
+        }
+
+
+        .status-3xx {
+
+            color: #996600;
+
+            font-weight: bold;
+
+        }
+
+
+        .status-4xx {
+
+            color: #d97706;
+
+            font-weight: bold;
+
+        }
+
+
+        .status-5xx {
+
+            color: red;
+
+            font-weight: bold;
+
+        }
+
+
+        /* ==================================================
+           Pagination
+        ================================================== */
+
+        .pagination {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 6px;
+
+            margin-top: 25px;
+
+            margin-bottom: 30px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .pagination a {
+
+            display: inline-block;
+
+            padding:
+                8px 12px;
+
+            background: white;
+
+            border:
+                1px solid #ddd;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+            color: #333;
+
+            font-size: 14px;
+
+        }
+
+
+        .pagination a:hover {
+
+            background: #f0f0f0;
+
+        }
+
+
+        .pagination a.active {
+
+            background: #222;
+
+            color: white;
+
+            border-color: #222;
+
+        }
+
+
+        .pagination .disabled {
+
+            display: inline-block;
+
+            padding:
+                8px 12px;
+
+            border:
+                1px solid #eee;
+
+            border-radius: 6px;
+
+            color: #aaa;
+
+            background: #f5f5f5;
+
+        }
+
+
+        /* ==================================================
+           Empty
+        ================================================== */
+
+        .empty {
+
+            text-align: center;
+
+            padding: 50px;
+
+            color: #888;
+
+            background: white;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <h1>
+        ALB Log Viewer
+    </h1>
+
+
+    <!-- ==================================================
+         Latest Log
+    ================================================== -->
+
+    <div class="latest-log">
+
+
+        <div class="latest-title">
+            Latest Log
+        </div>
+
+
+        {% if latest_file %}
+
+            <div class="latest-time">
+
+                {{ latest_file["LastModified"].strftime(
+                    "%Y-%m-%d %H:%M"
+                ) }}
+
+                UTC
+
+            </div>
+
+
+            <div class="latest-type">
+
+                ALB access log
+
+            </div>
+
+        {% else %}
+
+            <div class="latest-time">
+
+                No logs found
+
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+    <!-- ==================================================
+         Summary
+    ================================================== -->
+
+    <div class="summary">
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Total Requests
+            </div>
+
+            <div class="card-value">
+                {{ total }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                2xx
+            </div>
+
+            <div class="card-value">
+                {{ status_2xx }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                3xx
+            </div>
+
+            <div class="card-value">
+                {{ status_3xx }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                4xx
+            </div>
+
+            <div class="card-value">
+                {{ status_4xx }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                5xx
+            </div>
+
+            <div class="card-value">
+                {{ status_5xx }}
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ==================================================
+         Filters
+    ================================================== -->
+
+    <div class="filters">
+
+
+        <!-- Mode -->
+
+        <div class="filter-mode">
+
+
+            <button
+                type="button"
+                id="recentModeBtn"
+                class="{% if mode != 'custom' %}active{% endif %}"
+                onclick="showRecentMode()"
+            >
+
+                최근 시간
+
+            </button>
+
+
+            <button
+                type="button"
+                id="customModeBtn"
+                class="{% if mode == 'custom' %}active{% endif %}"
+                onclick="showCustomMode()"
+            >
+
+                날짜 / 시간 지정
+
+            </button>
+
+
+        </div>
+
+
+        <!-- ==================================================
+             Recent Mode
+        ================================================== -->
+
+        <div
+            id="recentMode"
+            style="
+                display:
+                {% if mode == 'custom' %}
+                    none
+                {% else %}
+                    block
+                {% endif %};
+            "
+        >
+
+
+            <form method="get">
+
+
+                <input
+                    type="hidden"
+                    name="mode"
+                    value="recent"
+                >
+
+
+                <select name="range">
+
+
+                    <option
+                        value="1"
+                        {% if range_value == "1" %}
+                            selected
+                        {% endif %}
+                    >
+
+                        최근 1시간
+
+                    </option>
+
+
+                    <option
+                        value="3"
+                        {% if range_value == "3" %}
+                            selected
+                        {% endif %}
+                    >
+
+                        최근 3시간
+
+                    </option>
+
+
+                    <option
+                        value="6"
+                        {% if range_value == "6" %}
+                            selected
+                        {% endif %}
+                    >
+
+                        최근 6시간
+
+                    </option>
+
+
+                    <option
+                        value="24"
+                        {% if range_value == "24" %}
+                            selected
+                        {% endif %}
+                    >
+
+                        최근 24시간
+
+                    </option>
+
+
+                </select>
+
+
+                <select name="status">
+
+
+                    <option
+                        value="all"
+                        {% if status_filter == "all" %}
+                            selected
+                        {% endif %}
+                    >
+                        All
+                    </option>
+
+
+                    <option
+                        value="2"
+                        {% if status_filter == "2" %}
+                            selected
+                        {% endif %}
+                    >
+                        2xx
+                    </option>
+
+
+                    <option
+                        value="3"
+                        {% if status_filter == "3" %}
+                            selected
+                        {% endif %}
+                    >
+                        3xx
+                    </option>
+
+
+                    <option
+                        value="4"
+                        {% if status_filter == "4" %}
+                            selected
+                        {% endif %}
+                    >
+                        4xx
+                    </option>
+
+
+                    <option
+                        value="5"
+                        {% if status_filter == "5" %}
+                            selected
+                        {% endif %}
+                    >
+                        5xx
+                    </option>
+
+
+                </select>
+
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search IP, target, URI..."
+                    value="{{ search }}"
+                >
+
+
+                <button type="submit">
+                    Search
+                </button>
+
+
+                <a href="/">
+                    Reset
+                </a>
+
+
+            </form>
+
+
+        </div>
+
+
+        <!-- ==================================================
+             Custom Mode
+        ================================================== -->
+
+        <div
+            id="customMode"
+            style="
+                display:
+                {% if mode == 'custom' %}
+                    block
+                {% else %}
+                    none
+                {% endif %};
+            "
+        >
+
+
+            <form method="get">
+
+
+                <input
+                    type="hidden"
+                    name="mode"
+                    value="custom"
+                >
+
+
+                <div class="custom-row">
+
+
+                    <span class="custom-label">
+                        시작
+                    </span>
+
+
+                    <input
+                        type="date"
+                        name="start_date"
+                        value="{{ start_date }}"
+                        required
+                    >
+
+
+                    <input
+                        type="time"
+                        name="start_time"
+                        value="{{ start_time }}"
+                        required
+                    >
+
+
+                    <span>
+                        ~
+                    </span>
+
+
+                    <span class="custom-label">
+                        종료
+                    </span>
+
+
+                    <input
+                        type="date"
+                        name="end_date"
+                        value="{{ end_date }}"
+                        required
+                    >
+
+
+                    <input
+                        type="time"
+                        name="end_time"
+                        value="{{ end_time }}"
+                        required
+                    >
+
+
+                </div>
+
+
+                <br>
+
+
+                <select name="status">
+
+
+                    <option
+                        value="all"
+                        {% if status_filter == "all" %}
+                            selected
+                        {% endif %}
+                    >
+                        All
+                    </option>
+
+
+                    <option
+                        value="2"
+                        {% if status_filter == "2" %}
+                            selected
+                        {% endif %}
+                    >
+                        2xx
+                    </option>
+
+
+                    <option
+                        value="3"
+                        {% if status_filter == "3" %}
+                            selected
+                        {% endif %}
+                    >
+                        3xx
+                    </option>
+
+
+                    <option
+                        value="4"
+                        {% if status_filter == "4" %}
+                            selected
+                        {% endif %}
+                    >
+                        4xx
+                    </option>
+
+
+                    <option
+                        value="5"
+                        {% if status_filter == "5" %}
+                            selected
+                        {% endif %}
+                    >
+                        5xx
+                    </option>
+
+
+                </select>
+
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search IP, target, URI..."
+                    value="{{ search }}"
+                >
+
+
+                <button type="submit">
+                    조회
+                </button>
+
+
+                <a href="/">
+                    Reset
+                </a>
+
+
+                <div class="timezone-info">
+
+                    입력 시간은
+                    <strong>KST</strong>
+                    기준입니다.
+
+                    ALB Access Log는
+                    <strong>UTC</strong>
+                    기준으로 자동 변환됩니다.
+
+                </div>
+
+
+                {% if custom_error %}
+
+                    <div class="error-message">
+
+                        {{ custom_error }}
+
+                    </div>
+
+                {% endif %}
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ==================================================
+         Result Count
+    ================================================== -->
+
+    <div class="result-count">
+
+
+        {% if total_filtered > 0 %}
+
+
+            Showing
+
+            <strong>
+                {{ ((page - 1) * per_page) + 1 }}
+            </strong>
+
+            -
+
+            <strong>
+                {{
+                    [
+                        page * per_page,
+                        total_filtered
+                    ] | min
+                }}
+            </strong>
+
+            of
+
+            <strong>
+                {{ total_filtered }}
+            </strong>
+
+            requests
+
+
+        {% else %}
+
+
+            No requests found
+
+
+        {% endif %}
+
+
+    </div>
+
+
+    <!-- ==================================================
+         Table
+    ================================================== -->
+
+    <div class="table-container">
+
+
+        {% if logs %}
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Time
+                        </th>
+
+                        <th>
+                            Client IP
+                        </th>
+
+                        <th>
+                            Target
+                        </th>
+
+                        <th>
+                            ELB Status
+                        </th>
+
+                        <th>
+                            Target Status
+                        </th>
+
+                        <th>
+                            Request
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    {% for log in logs %}
+
+
+                        <tr>
+
+
+                            <td>
+                                {{ log.time }}
+                            </td>
+
+
+                            <td>
+                                {{ log.client }}
+                            </td>
+
+
+                            <td>
+                                {{ log.target }}
+                            </td>
+
+
+                            <td
+                                class="
+                                {% if log.elb_status.startswith('2') %}
+                                    status-2xx
+                                {% elif log.elb_status.startswith('3') %}
+                                    status-3xx
+                                {% elif log.elb_status.startswith('4') %}
+                                    status-4xx
+                                {% elif log.elb_status.startswith('5') %}
+                                    status-5xx
+                                {% endif %}
+                                "
+                            >
+
+                                {{ log.elb_status }}
+
+                            </td>
+
+
+                            <td>
+                                {{ log.target_status }}
+                            </td>
+
+
+                            <td>
+                                {{ log.request }}
+                            </td>
+
+
+                        </tr>
+
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        {% else %}
+
+
+            <div class="empty">
+
+                조회된 로그가 없습니다.
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+    <!-- ==================================================
+         Pagination
+    ================================================== -->
+
+    {% if total_pages > 1 %}
+
+
+        <div class="pagination">
+
+
+            <!-- Previous -->
+
+            {% if page > 1 %}
+
+
+                <a
+                    href="{{ url_for(
+                        'index',
+                        mode=mode,
+                        range=range_value,
+                        status=status_filter,
+                        search=search,
+                        start_date=start_date,
+                        start_time=start_time,
+                        end_date=end_date,
+                        end_time=end_time,
+                        page=page - 1
+                    ) }}"
+                >
+
+                    ← Previous
+
+                </a>
+
+
+            {% else %}
+
+
+                <span class="disabled">
+
+                    ← Previous
+
+                </span>
+
+
+            {% endif %}
+
+
+            <!-- Page Numbers -->
+
+            {% for p in range(
+                1,
+                total_pages + 1
+            ) %}
+
+
+                <a
+                    href="{{ url_for(
+                        'index',
+                        mode=mode,
+                        range=range_value,
+                        status=status_filter,
+                        search=search,
+                        start_date=start_date,
+                        start_time=start_time,
+                        end_date=end_date,
+                        end_time=end_time,
+                        page=p
+                    ) }}"
+                    class="
+                        {% if p == page %}
+                            active
+                        {% endif %}
+                    "
+                >
+
+                    {{ p }}
+
+                </a>
+
+
+            {% endfor %}
+
+
+            <!-- Next -->
+
+            {% if page < total_pages %}
+
+
+                <a
+                    href="{{ url_for(
+                        'index',
+                        mode=mode,
+                        range=range_value,
+                        status=status_filter,
+                        search=search,
+                        start_date=start_date,
+                        start_time=start_time,
+                        end_date=end_date,
+                        end_time=end_time,
+                        page=page + 1
+                    ) }}"
+                >
+
+                    Next →
+
+                </a>
+
+
+            {% else %}
+
+
+                <span class="disabled">
+
+                    Next →
+
+                </span>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    {% endif %}
+
+
+    <!-- ==================================================
+         JavaScript
+    ================================================== -->
+
+    <script>
+
+
+        function showRecentMode() {
+
+            document.getElementById(
+                "recentMode"
+            ).style.display = "block";
+
+
+            document.getElementById(
+                "customMode"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "recentModeBtn"
+            ).classList.add(
+                "active"
+            );
+
+
+            document.getElementById(
+                "customModeBtn"
+            ).classList.remove(
+                "active"
+            );
+
+        }
+
+
+        function showCustomMode() {
+
+            document.getElementById(
+                "recentMode"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "customMode"
+            ).style.display = "block";
+
+
+            document.getElementById(
+                "recentModeBtn"
+            ).classList.remove(
+                "active"
+            );
+
+
+            document.getElementById(
+                "customModeBtn"
+            ).classList.add(
+                "active"
+            );
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
