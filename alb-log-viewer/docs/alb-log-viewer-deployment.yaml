@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alb-log-viewer
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alb-log-viewer
+  template:
+    metadata:
+      labels:
+        app: alb-log-viewer
+    spec:
+      serviceAccountName: alb-log-viewer-sa
+      containers:
+        - name: alb-log-viewer
+          image: 245067526307.dkr.ecr.ap-northeast-2.amazonaws.com/alb-log-viewer:1.0
+          ports:
+            - containerPort: 5001

@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alb-log-viewer-ingress
+  namespace: monitoring
+  annotations:
+    alb.ingress.kubernetes.io/group.name: heewoon1204
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /logs
+            pathType: Prefix
+            backend:
+              service:
+                name: alb-log-viewer
+                port:
+                  number: 80
