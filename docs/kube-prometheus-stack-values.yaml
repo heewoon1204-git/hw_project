@@ -1,0 +1,43 @@
+prometheus:
+  prometheusSpec:
+    nodeSelector:
+      eks.amazonaws.com/nodegroup: monitoring
+
+    tolerations:
+      - key: workload
+        operator: Equal
+        value: monitoring
+        effect: NoSchedule
+
+grafana:
+  grafana.ini:
+    server:
+      root_url: https://www.heewoon1204.com/grafana/
+      serve_from_sub_path: true
+
+  nodeSelector:
+    eks.amazonaws.com/nodegroup: monitoring
+
+  tolerations:
+    - key: workload
+      operator: Equal
+      value: monitoring
+      effect: NoSchedule
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: gp3
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
+
+alertmanager:
+  alertmanagerSpec:
+    nodeSelector:
+      eks.amazonaws.com/nodegroup: monitoring
+
+    tolerations:
+      - key: workload
+        operator: Equal
+        value: monitoring
+        effect: NoSchedule

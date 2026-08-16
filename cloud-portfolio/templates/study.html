@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Study | Heewoon Cloud Lab</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: #f6f7f9;
+            color: #1f2937;
+        }
+
+
+        /* =========================================
+           Navigation
+        ========================================= */
+
+        nav {
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            height: 68px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 48px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.94
+            );
+
+            backdrop-filter: blur(10px);
+
+            border-bottom:
+                1px solid #e5e7eb;
+        }
+
+
+        .logo {
+            color: #111827;
+
+            text-decoration: none;
+
+            font-size: 19px;
+
+            font-weight: 750;
+
+            letter-spacing: -0.4px;
+        }
+
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 26px;
+        }
+
+
+        .nav-links a {
+            color: #6b7280;
+
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+
+        .nav-links a:hover {
+            color: #111827;
+        }
+
+
+        /* =========================================
+           Page
+        ========================================= */
+
+        .page {
+            max-width: 1080px;
+
+            margin: 0 auto;
+
+            padding:
+                80px 32px 90px;
+        }
+
+
+        .page-header {
+            margin-bottom: 45px;
+        }
+
+
+        .eyebrow {
+            margin-bottom: 12px;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+
+        .page-header h1 {
+            margin: 0;
+
+            color: #111827;
+
+            font-size: 48px;
+
+            line-height: 1.15;
+
+            letter-spacing: -2px;
+        }
+
+
+        .page-header p {
+            max-width: 720px;
+
+            margin-top: 18px;
+
+            color: #6b7280;
+
+            font-size: 16px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================================
+           GitHub Button
+        ========================================= */
+
+        .github-button {
+            display: inline-block;
+
+            margin-top: 22px;
+
+            padding:
+                10px 15px;
+
+            background: white;
+
+            border:
+                1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            color: #374151;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition:
+                background 0.15s ease,
+                border-color 0.15s ease,
+                transform 0.15s ease;
+        }
+
+
+        .github-button:hover {
+            background: #f9fafb;
+
+            border-color: #9ca3af;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        /* =========================================
+           Category
+        ========================================= */
+
+        .category {
+            margin-bottom: 34px;
+        }
+
+
+        .category-header {
+            margin-bottom: 15px;
+        }
+
+
+        .category-title {
+            margin: 0;
+
+            color: #111827;
+
+            font-size: 23px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .category-description {
+            margin-top: 6px;
+
+            color: #9ca3af;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           Document Card
+        ========================================= */
+
+        .document-card {
+            display: block;
+
+            padding: 25px 26px;
+
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            text-decoration: none;
+
+            color: inherit;
+
+            transition:
+                transform 0.15s ease,
+                box-shadow 0.15s ease,
+                border-color 0.15s ease;
+        }
+
+
+        .document-card:hover {
+            transform:
+                translateY(-3px);
+
+            border-color: #d1d5db;
+
+            box-shadow:
+                0 8px 22px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.06
+                );
+        }
+
+
+        .document-title {
+            margin-bottom: 8px;
+
+            color: #111827;
+
+            font-size: 17px;
+
+            font-weight: 700;
+        }
+
+
+        .document-description {
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.65;
+        }
+
+
+        .document-link {
+            display: inline-block;
+
+            margin-top: 14px;
+
+            color: #374151;
+
+            font-size: 12px;
+
+            font-weight: 650;
+        }
+
+
+        /* =========================================
+           Empty State
+        ========================================= */
+
+        .empty-state {
+            padding: 32px;
+
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            color: #9ca3af;
+
+            font-size: 14px;
+
+            text-align: center;
+        }
+
+
+        /* =========================================
+           Notice
+        ========================================= */
+
+        .notice {
+            margin-top: 45px;
+
+            padding: 23px;
+
+            background: #111827;
+
+            border-radius: 11px;
+
+            color: white;
+        }
+
+
+        .notice-title {
+            margin-bottom: 8px;
+
+            font-size: 16px;
+
+            font-weight: 700;
+        }
+
+
+        .notice-text {
+            color: #cbd5e1;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================================
+           Footer
+        ========================================= */
+
+        footer {
+            padding:
+                30px 20px 45px;
+
+            color: #9ca3af;
+
+            font-size: 13px;
+
+            text-align: center;
+        }
+
+
+        /* =========================================
+           Responsive
+        ========================================= */
+
+        @media (
+            max-width: 768px
+        ) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+
+            .nav-links {
+                display: none;
+            }
+
+
+            .page {
+                padding:
+                    60px 22px 70px;
+            }
+
+
+            .page-header h1 {
+                font-size: 39px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         Navigation
+    ========================================= -->
+
+    <nav>
+
+        <a
+            href="/"
+            class="logo"
+        >
+            HEEWOON CLOUD LAB
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/resume">
+                Resume
+            </a>
+
+            <a href="/study">
+                Study
+            </a>
+
+            <a href="/architecture">
+                Architecture
+            </a>
+
+            <a href="/logs">
+                Logs
+            </a>
+
+            <a href="/grafana">
+                Grafana
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================
+         Main
+    ========================================= -->
+
+    <main class="page">
+
+
+        <!-- =====================================
+             Header
+        ===================================== -->
+
+        <header class="page-header">
+
+            <div class="eyebrow">
+                Learning / Technical Notes
+            </div>
+
+
+            <h1>
+                Study
+            </h1>
+
+
+            <p>
+
+                AWS, Kubernetes, Docker,
+                네트워크와 스토리지 등
+                클라우드 인프라를 학습하면서
+                직접 실습하고 정리한 기술 내용을
+                기록하고 있습니다.
+
+            </p>
+
+
+            <a
+                href="https://github.com/heewoon1204-git/infra_study"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="github-button"
+            >
+                GitHub Repository ↗
+            </a>
+
+        </header>
+
+
+        <!-- =====================================
+             GitHub Categories
+        ===================================== -->
+
+        {% if categories %}
+
+            {% for category in categories %}
+
+            <section class="category">
+
+                <div class="category-header">
+
+                    <h2 class="category-title">
+                        {{ category.name }}
+                    </h2>
+
+                    <div class="category-description">
+                        GitHub Repository / {{ category.name }}
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="/study/{{ category.name }}"
+                    class="document-card"
+                >
+
+                    <div class="document-title">
+
+                        {{ category.name }}
+
+                    </div>
+
+
+                    <div class="document-description">
+
+                        {{ category.name }}
+                        관련 학습 내용과
+                        기술 문서를 확인할 수 있습니다.
+
+                    </div>
+
+
+                    <div class="document-link">
+
+                        View Notes →
+
+                    </div>
+
+                </a>
+
+            </section>
+
+            {% endfor %}
+
+
+        {% else %}
+
+            <div class="empty-state">
+
+                GitHub Repository에서
+                학습 카테고리를 불러오지 못했습니다.
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =====================================
+             Notice
+        ===================================== -->
+
+        <div class="notice">
+
+            <div class="notice-title">
+                GitHub 기반 Study Notes
+            </div>
+
+
+            <div class="notice-text">
+
+                이 페이지의 학습 카테고리는
+                GitHub의 infra_study Repository를
+                기준으로 자동으로 불러옵니다.
+
+                <br><br>
+
+                이후 각 카테고리에서 Markdown 문서를
+                선택하면 GitHub의 실제 문서를
+                이 사이트에서 바로 읽을 수 있도록
+                확장할 예정입니다.
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =========================================
+         Footer
+    ========================================= -->
+
+    <footer>
+
+        Heewoon Cloud Lab
+        · AWS · Kubernetes · Observability
+
+    </footer>
+
+
+</body>
+
+</html>

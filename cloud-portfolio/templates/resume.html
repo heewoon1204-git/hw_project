@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Resume | Heewoon Cloud Lab</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: #f6f7f9;
+            color: #1f2937;
+        }
+
+
+        /* =========================================
+           Navigation
+        ========================================= */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            height: 68px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 48px;
+
+            background: rgba(255, 255, 255, 0.94);
+
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo {
+            color: #111827;
+
+            text-decoration: none;
+
+            font-size: 19px;
+            font-weight: 750;
+
+            letter-spacing: -0.4px;
+        }
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 26px;
+        }
+
+        .nav-links a {
+            color: #6b7280;
+
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #111827;
+        }
+
+
+        /* =========================================
+           Layout
+        ========================================= */
+
+        .page {
+            max-width: 1080px;
+
+            margin: 0 auto;
+
+            padding: 80px 32px 90px;
+        }
+
+
+        .page-header {
+            margin-bottom: 55px;
+        }
+
+        .eyebrow {
+            margin-bottom: 12px;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+        .page-header h1 {
+            margin: 0;
+
+            color: #111827;
+
+            font-size: 48px;
+
+            line-height: 1.15;
+
+            letter-spacing: -2px;
+        }
+
+        .page-header p {
+            max-width: 720px;
+
+            margin-top: 18px;
+
+            color: #6b7280;
+
+            font-size: 16px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================================
+           Section
+        ========================================= */
+
+        .section {
+            margin-bottom: 58px;
+        }
+
+        .section-title {
+            margin-bottom: 20px;
+
+            color: #111827;
+
+            font-size: 26px;
+
+            letter-spacing: -0.7px;
+        }
+
+
+        .section-card {
+            padding: 30px;
+
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 15px;
+        }
+
+
+        /* =========================================
+           Profile
+        ========================================= */
+
+        .profile-text {
+            margin: 0;
+
+            color: #4b5563;
+
+            font-size: 15px;
+
+            line-height: 1.9;
+        }
+
+
+        /* =========================================
+           Skills
+        ========================================= */
+
+        .skill-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 16px;
+        }
+
+
+        .skill-group {
+            padding: 22px;
+
+            background: #fafafa;
+
+            border:
+                1px solid #eceef1;
+
+            border-radius: 11px;
+        }
+
+        .skill-group-title {
+            margin-bottom: 12px;
+
+            color: #111827;
+
+            font-size: 15px;
+
+            font-weight: 700;
+        }
+
+        .skill-list {
+            margin: 0;
+            padding: 0;
+
+            list-style: none;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+        .skill-list li {
+            margin-bottom: 3px;
+        }
+
+
+        /* =========================================
+           Experience
+        ========================================= */
+
+        .experience {
+            position: relative;
+
+            padding-left: 26px;
+
+            border-left:
+                2px solid #e5e7eb;
+        }
+
+
+        .experience-item {
+            position: relative;
+
+            margin-bottom: 42px;
+        }
+
+
+        .experience-item:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .experience-item::before {
+            content: "";
+
+            position: absolute;
+
+            left: -33px;
+            top: 4px;
+
+            width: 11px;
+            height: 11px;
+
+            border-radius: 50%;
+
+            background: #111827;
+        }
+
+
+        .experience-title {
+            margin: 0;
+
+            color: #111827;
+
+            font-size: 21px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.4px;
+        }
+
+
+        .experience-meta {
+            margin-top: 9px;
+
+            color: #9ca3af;
+
+            font-size: 13px;
+        }
+
+
+        .experience-role {
+            margin-top: 5px;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+
+        .experience-heading {
+            margin-top: 26px;
+            margin-bottom: 10px;
+
+            color: #374151;
+
+            font-size: 15px;
+
+            font-weight: 700;
+        }
+
+
+        .experience-list {
+            margin: 0;
+
+            padding-left: 19px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+
+        .experience-list li {
+            margin-bottom: 5px;
+        }
+
+
+        /* =========================================
+           Study
+        ========================================= */
+
+        .study-item {
+            margin-bottom: 35px;
+        }
+
+        .study-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .study-title {
+            margin: 0 0 7px;
+
+            color: #111827;
+
+            font-size: 19px;
+
+            font-weight: 700;
+        }
+
+        .study-purpose {
+            margin-bottom: 14px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+        .github-link {
+            display: inline-block;
+
+            margin-bottom: 15px;
+
+            color: #374151;
+
+            font-size: 13px;
+
+            font-weight: 650;
+
+            text-decoration: none;
+        }
+
+        .github-link:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================================
+           Education / Certification
+        ========================================= */
+
+        .simple-list {
+            margin: 0;
+
+            padding: 0;
+
+            list-style: none;
+        }
+
+        .simple-list li {
+            padding:
+                14px 0;
+
+            color: #4b5563;
+
+            font-size: 14px;
+
+            border-bottom:
+                1px solid #f0f1f3;
+        }
+
+        .simple-list li:last-child {
+            border-bottom: none;
+        }
+
+
+        /* =========================================
+           Project Highlight
+        ========================================= */
+
+        .project-highlight {
+            padding: 28px;
+
+            background: #111827;
+
+            border-radius: 14px;
+
+            color: white;
+        }
+
+        .project-highlight-title {
+            margin-bottom: 12px;
+
+            font-size: 21px;
+
+            font-weight: 700;
+        }
+
+        .project-highlight-description {
+            max-width: 760px;
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+
+        .project-link {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 650;
+
+            text-decoration: none;
+        }
+
+
+        /* =========================================
+           Footer
+        ========================================= */
+
+        footer {
+            padding:
+                30px 20px 45px;
+
+            color: #9ca3af;
+
+            font-size: 13px;
+
+            text-align: center;
+        }
+
+
+        /* =========================================
+           Responsive
+        ========================================= */
+
+        @media (max-width: 768px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page {
+                padding:
+                    60px 22px 70px;
+            }
+
+            .page-header h1 {
+                font-size: 39px;
+            }
+
+            .skill-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-card {
+                padding: 23px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         Navigation
+    ========================================= -->
+
+    <nav>
+
+        <a
+            href="/"
+            class="logo"
+        >
+            HEEWOON CLOUD LAB
+        </a>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/resume">
+                Resume
+            </a>
+
+            <a href="/study">
+                Study
+            </a>
+
+            <a href="/architecture">
+                Architecture
+            </a>
+
+            <a href="/logs">
+                Logs
+            </a>
+
+            <a href="/grafana">
+                Grafana
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="page">
+
+
+        <!-- =====================================
+             Header
+        ===================================== -->
+
+        <header class="page-header">
+
+            <div class="eyebrow">
+                Profile / Experience
+            </div>
+
+            <h1>
+                Cloud / Infrastructure Engineer
+            </h1>
+
+            <p>
+                AWS 기반 클라우드 인프라 운영,
+                플랫폼 전환, 데이터 Migration,
+                모니터링 및 장애 분석 경험을
+                보유하고 있습니다.
+            </p>
+
+        </header>
+
+
+        <!-- =====================================
+             Profile
+        ===================================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                Profile
+            </h2>
+
+            <div class="section-card">
+
+                <p class="profile-text">
+
+                    약 8년간 통신 도메인 기반 프로젝트에 참여하며
+                    상품 운영, 데이터 Migration,
+                    AWS 기반 서비스 운영 및 시스템 분석 업무를
+                    수행하였습니다.
+
+                    <br><br>
+
+                    AWS EKS 기반 환경에서 Couchbase,
+                    Elasticsearch, EFK, Grafana 등을 활용한
+                    운영 및 모니터링 경험을 보유하고 있으며,
+                    로그 및 Metric 기반 장애 분석,
+                    운영 안정화, SOP 및 운영 가이드 문서화를
+                    수행하였습니다.
+
+                    <br><br>
+
+                    차세대 및 신규 상품 플랫폼 프로젝트에서는
+                    AS-IS / TO-BE 구조 분석 기반 데이터 Mapping,
+                    데이터 전환, 정합성 검증 및 플랫폼 전환 검증
+                    업무를 수행하였으며,
+                    데이터와 인프라 영역을 연결한 시스템 분석
+                    경험을 보유하고 있습니다.
+
+                    <br><br>
+
+                    운영·개발·솔루션 조직과 협업하며
+                    장애 분석, 테스트 검증,
+                    운영 프로세스 개선 및 서비스 안정화
+                    업무를 수행해왔습니다.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             Skills
+        ===================================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                Skills
+            </h2>
+
+            <div class="skill-grid">
+
+
+                <div class="skill-group">
+
+                    <div class="skill-group-title">
+                        Database / Query
+                    </div>
+
+                    <ul class="skill-list">
+
+                        <li>PostgreSQL</li>
+                        <li>SQL</li>
+                        <li>데이터 구조 분석</li>
+                        <li>데이터 Mapping</li>
+                        <li>데이터 정합성 검증</li>
+                        <li>데이터 Migration</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="skill-group">
+
+                    <div class="skill-group-title">
+                        Infra / Platform
+                    </div>
+
+                    <ul class="skill-list">
+
+                        <li>AWS EKS</li>
+                        <li>AWS RDS</li>
+                        <li>Couchbase</li>
+                        <li>Elasticsearch / EFK</li>
+                        <li>Grafana</li>
+                        <li>MSK</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="skill-group">
+
+                    <div class="skill-group-title">
+                        Monitoring / Analysis
+                    </div>
+
+                    <ul class="skill-list">
+
+                        <li>PromQL 기반 Metric 분석</li>
+                        <li>로그 기반 장애 분석</li>
+                        <li>운영 모니터링</li>
+                        <li>지표 분석</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="skill-group">
+
+                    <div class="skill-group-title">
+                        Tools
+                    </div>
+
+                    <ul class="skill-list">
+
+                        <li>DBeaver</li>
+                        <li>Jira</li>
+                        <li>LoadRunner</li>
+                        <li>Postman</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             Experience
+        ===================================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                Experience
+            </h2>
+
+
+            <div class="section-card">
+
+                <div class="experience">
+
+
+                    <!-- New Product -->
+
+                    <div class="experience-item">
+
+                        <h3 class="experience-title">
+                            신규 상품 솔루션 구축 프로젝트
+                        </h3>
+
+                        <div class="experience-meta">
+                            2025.07 ~ 2026.05
+                        </div>
+
+                        <div class="experience-role">
+                            데이터 전환 및 병행운영 지원 ·
+                            PostgreSQL / SQL
+                        </div>
+
+
+                        <div class="experience-heading">
+                            주요 업무
+                        </div>
+
+                        <ul class="experience-list">
+
+                            <li>
+                                AS-IS / TO-BE 구조 기반
+                                데이터 Mapping 분석
+                            </li>
+
+                            <li>
+                                기존 상품 시스템 데이터 구조를
+                                분석하고 신규 솔루션 구조에 맞춘
+                                데이터 전환 수행
+                            </li>
+
+                            <li>
+                                SQL 기반 데이터 가공 및
+                                전환 데이터 생성
+                            </li>
+
+                            <li>
+                                데이터 검증 및 정합성 확인
+                            </li>
+
+                            <li>
+                                병행운영 기간 중 기능 및
+                                데이터 검증 수행
+                            </li>
+
+                        </ul>
+
+
+                        <div class="experience-heading">
+                            주요 수행 내용
+                        </div>
+
+                        <ul class="experience-list">
+
+                            <li>
+                                상품 테이블 구조 분석 및
+                                전환 대상 데이터 정의
+                            </li>
+
+                            <li>
+                                신규 구조에 맞춘 데이터 변환 및
+                                적재 작업 수행
+                            </li>
+
+                            <li>
+                                이상 데이터 및 오류 데이터 분석
+                            </li>
+
+                            <li>
+                                데이터 오류 원인 파악 및
+                                해결 방안 도출
+                            </li>
+
+                            <li>
+                                데이터 건수 및 집계(sum) 기반
+                                정합성 검증
+                            </li>
+
+                            <li>
+                                신규 솔루션 기반 상품 생성 및
+                                기능 검증
+                            </li>
+
+                            <li>
+                                기능 흐름과 데이터 처리 과정의
+                                이슈 분석을 통한 안정화 지원
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <!-- SM -->
+
+                    <div class="experience-item">
+
+                        <h3 class="experience-title">
+                            인프라 운영 (SM)
+                        </h3>
+
+                        <div class="experience-meta">
+                            2024.01 ~ 2025.06
+                        </div>
+
+                        <div class="experience-role">
+                            AWS EKS 기반 서비스 운영 및 장애 대응
+                        </div>
+
+
+                        <div class="experience-heading">
+                            주요 업무
+                        </div>
+
+                        <ul class="experience-list">
+
+                            <li>
+                                AWS EKS 기반 서비스 운영 및
+                                시스템 안정성 관리
+                            </li>
+
+                            <li>
+                                로그 및 Metric 기반
+                                장애 원인 분석 및 대응
+                            </li>
+
+                            <li>
+                                반복 장애 분석을 통한
+                                운영 개선 및 대응 절차 표준화
+                            </li>
+
+                            <li>
+                                SOP 기반 장애 처리 및
+                                운영 이력 관리
+                            </li>
+
+                        </ul>
+
+
+                        <div class="experience-heading">
+                            주요 수행 내용
+                        </div>
+
+                        <ul class="experience-list">
+
+                            <li>
+                                AWS EKS 환경 기반 서비스 운영 현황
+                                및 장애 모니터링
+                            </li>
+
+                            <li>
+                                Grafana 대시보드 기반 서비스 상태 및
+                                Resource 사용량 모니터링
+                            </li>
+
+                            <li>
+                                PromQL 기반 Metric 분석
+                            </li>
+
+                            <li>
+                                Couchbase, Elasticsearch, EFK 기반
+                                로그 및 데이터 분석
+                            </li>
+
+                            <li>
+                                Postman 기반 API 호출 및
+                                응답 검증
+                            </li>
+
+                            <li>
+                                로그 및 운영 데이터를 기반으로
+                                서비스 구조 및 인증 흐름 분석
+                            </li>
+
+                            <li>
+                                반복 장애에 대한 이력 및
+                                원인 분석 자료 구축
+                            </li>
+
+                            <li>
+                                Resource 사용량 분석 기반
+                                Pod / Instance Type 최적화 및
+                                비용 개선 제안
+                            </li>
+
+                            <li>
+                                분석 내용을 장표화하여
+                                팀 공유 및 신규 인력 온보딩 자료 활용
+                            </li>
+
+                            <li>
+                                SOP 기반 운영 가이드 및
+                                장애 대응 절차 문서화
+                            </li>
+
+                            <li>
+                                Jira 대시보드를 통한
+                                장애 및 운영 이력 관리 체계 개선
+                            </li>
+
+                            <li>
+                                신규 솔루션 배포 후 점검 체크리스트 작성 및
+                                운영 프로세스 정비
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <!-- Next Generation 2021 -->
+
+                    <div class="experience-item">
+
+                        <h3 class="experience-title">
+                            LG U+ 차세대 상품 플랫폼 구축
+                        </h3>
+
+                        <div class="experience-meta">
+                            2021.09 ~ 2023.12
+                        </div>
+
+                        <div class="experience-role">
+                            상품 데이터 Migration,
+                            플랫폼 구조 분석 및 운영 전환 지원
+                        </div>
+
+
+                        <div class="experience-heading">
+                            상품 데이터 Migration 지원
+                        </div>
+
+                        <ul class="experience-list">
+
+                            <li>
+                                기존 상품 시스템(AS-IS) 데이터 분석 및
+                                신규 플랫폼(TO-BE) 전환 지원
+                            </li>
+
+                            <li>
+                                외부 솔루션 기반 신규 상품 구조 분석 및
+                                데이터 Mapping
+                            </li>
+
+                            <li>
+                                Migration 대상 정의 및 전환 검증
+                            </li>
+
+                            <li>
+                                SQL 기반 데이터 추출·정리 및
+                                전환 데이터 구성
+                            </li>
+
+                            <li>
+                                데이터 전환 과정의 구조 차이 및
+                                오류 분석
+                            </li>
+
+                            <li>
+                                데이터 품질 이슈 분석 및
+                                개선 방향 도출 지원
+                            </li>
+
+                        </ul>
+
+
+                        <div class="experience-heading">
+                            플랫폼 구조 분석 및 운영 전환 지원
+                        </div>
+
+                        <ul class="experience-list">
+
+                            <li>
+                                AWS 기반 차세대 상품 플랫폼 환경 분석
+                            </li>
+
+                            <li>
+                                Amdocs Product Catalog 구조 분석 및
+                                서비스 흐름 검증
+                            </li>
+
+                            <li>
+                                Kubernetes(EKS), RDS 기반 서비스 환경 분석
+                            </li>
+
+                            <li>
+                                Couchbase, Elasticsearch, MSK 등
+                                주요 구성 요소 분석
+                            </li>
+
+                            <li>
+                                Blue-Green 배포 기반 운영 전환 검증
+                            </li>
+
+                            <li>
+                                LoadRunner 기반 성능 테스트 및
+                                NFT 수행
+                            </li>
+
+                            <li>
+                                테스트 결과 분석 및 리포트 작성
+                            </li>
+
+                            <li>
+                                로그 및 운영 데이터 기반 장애 및
+                                성능 이슈 분석
+                            </li>
+
+                            <li>
+                                제한된 정보 환경에서 기술 자료와 로그 기반
+                                시스템 구조 분석
+                            </li>
+
+                            <li>
+                                유관 조직 간 기술 이슈 조율 및
+                                Action Item 추적
+                            </li>
+
+                            <li>
+                                주요 회의 MOM 작성 및
+                                후속 조치사항 관리
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <!-- Product SM -->
+
+                    <div class="experience-item">
+
+                        <h3 class="experience-title">
+                            상품 운영 (SM)
+                        </h3>
+
+                        <div class="experience-meta">
+                            2020.02 ~ 2021.08
+                        </div>
+
+                        <div class="experience-role">
+                            상품 운영 담당
+                        </div>
+
+
+                        <div class="experience-heading">
+                            주요 수행 내용
+                        </div>
+
+                        <ul class="experience-list">
+
+                            <li>
+                                기존 요금제 기반 데이터 생성 및
+                                속성 변경 작업 수행
+                            </li>
+
+                            <li>
+                                솔루션 기반 상품 데이터 생성 및
+                                배포 지원
+                            </li>
+
+                            <li>
+                                상품 데이터 구조 및 속성 이해 기반
+                                운영 수행
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <!-- SI -->
+
+                    <div class="experience-item">
+
+                        <h3 class="experience-title">
+                            SI 개발
+                        </h3>
+
+                        <div class="experience-meta">
+                            2019.01 ~ 2020.01
+                        </div>
+
+                        <div class="experience-role">
+                            SI 개발 참여 · Vue.js / Java
+                        </div>
+
+
+                        <div class="experience-heading">
+                            주요 수행 내용
+                        </div>
+
+                        <ul class="experience-list">
+
+                            <li>
+                                Vue.js 기반 화면 개발 및
+                                데이터 조회 화면 구성
+                            </li>
+
+                            <li>
+                                Grid / Chart 기반
+                                데이터 시각화 기능 개발 참여
+                            </li>
+
+                            <li>
+                                시스템 구조 및 데이터 흐름에 대한
+                                이해 확보
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             Personal Study
+        ===================================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                Personal Technical Study
+            </h2>
+
+
+            <div class="section-card">
+
+
+                <div class="study-item">
+
+                    <h3 class="study-title">
+                        AWS / Container Infrastructure Hands-on
+                    </h3>
+
+                    <p class="study-purpose">
+
+                        Cloud Infrastructure 및
+                        Container Platform 운영 역량 강화를 위한
+                        AWS 기반 개인 실습
+
+                    </p>
+
+
+                    <a
+                        href="https://github.com/heewoon1204-git/infra_study"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="github-link"
+                    >
+                        github.com/heewoon1204-git/infra_study ↗
+                    </a>
+
+
+                    <ul class="experience-list">
+
+                        <li>
+                            VPC, Subnet, Route Table,
+                            Security Group 등 AWS 네트워크 구조 학습
+                        </li>
+
+                        <li>
+                            EC2 Linux 환경 구성 및
+                            Docker Container 운영 실습
+                        </li>
+
+                        <li>
+                            실습 과정에서 발생한 오류 원인 및
+                            해결 과정 문서화
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="study-item">
+
+                    <h3 class="study-title">
+                        AWS EKS 기반 장애 대응 및
+                        모니터링 환경 구축
+                    </h3>
+
+                    <p class="study-purpose">
+
+                        AWS EKS 기반 클라우드 인프라를 구축하고
+                        장애 상황을 재현하여
+                        모니터링·원인 분석·장애 대응 및 복구 과정을
+                        검증하는 실무형 프로젝트
+
+                    </p>
+
+
+                    <a
+                        href="https://github.com/heewoon1204-git/hw_project"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="github-link"
+                    >
+                        github.com/heewoon1204-git/hw_project ↗
+                    </a>
+
+
+                    <ul class="experience-list">
+
+                        <li>
+                            AWS EKS 기반 클라우드 인프라 및
+                            Kubernetes 아키텍처 구축
+                        </li>
+
+                        <li>
+                            비용 효율적인 아키텍처 설계 방안 검토
+                        </li>
+
+                        <li>
+                            구축 과정에서 발생한 장애 및 문제 상황의
+                            원인 분석과 해결 과정 정리
+                        </li>
+
+                        <li>
+                            ALB, RDS, Application까지 연계된
+                            End-to-End 서비스 환경 구축
+                        </li>
+
+                        <li>
+                            의도적인 장애 재현 및 모니터링을 통한
+                            장애 대응·원인 분석·복구 체계 검증
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             Current Project
+        ===================================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                Current Project
+            </h2>
+
+
+            <div class="project-highlight">
+
+                <div class="project-highlight-title">
+                    AWS EKS Infrastructure & Incident Lab
+                </div>
+
+
+                <div class="project-highlight-description">
+
+                    AWS VPC와 EKS 기반 환경을 직접 구축하고,
+                    ALB, Route 53, S3, Grafana,
+                    Prometheus 및 Kubernetes 구성 요소를
+                    연결하여 실제 운영 환경을 구성하고 있습니다.
+
+                    <br><br>
+
+                    현재는 ALB Access Log Viewer와
+                    Grafana를 구축했으며,
+                    이후 의도적인 장애를 발생시키고
+                    모니터링 → 로그 분석 → 원인 파악 →
+                    대응 → 복구까지 이어지는
+                    Incident Lab으로 확장할 예정입니다.
+
+                </div>
+
+
+                <a
+                    href="/architecture"
+                    class="project-link"
+                >
+                    View Project Architecture →
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             Education
+        ===================================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                Education
+            </h2>
+
+            <div class="section-card">
+
+                <ul class="simple-list">
+
+                    <li>
+                        <strong>경기대학교</strong>
+                        · 국어국문학과
+                        · 2012.03 ~ 2017.02
+                        · GPA 3.7 / 4.5
+                    </li>
+
+                    <li>
+                        <strong>학익여자고등학교</strong>
+                        · 인천
+                        · 2009.03 ~ 2012.02
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             Certification
+        ========================================= -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                Certification
+            </h2>
+
+            <div class="section-card">
+
+                <ul class="simple-list">
+
+                    <li>
+                        SQLD (SQL Developer)
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        Heewoon Cloud Lab
+        · AWS · Kubernetes · Observability
+
+    </footer>
+
+
+</body>
+
+</html>

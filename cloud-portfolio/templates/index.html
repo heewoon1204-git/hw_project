@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Heewoon Cloud Lab</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: #f6f7f9;
+
+            color: #1f2937;
+        }
+
+
+        /* =========================================
+           Navigation
+        ========================================= */
+
+        nav {
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            height: 68px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 48px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.94
+            );
+
+            backdrop-filter: blur(10px);
+
+            border-bottom:
+                1px solid #e5e7eb;
+        }
+
+
+        .logo {
+            color: #111827;
+
+            text-decoration: none;
+
+            font-size: 19px;
+
+            font-weight: 750;
+
+            letter-spacing: -0.4px;
+        }
+
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 26px;
+        }
+
+
+        .nav-links a {
+            color: #6b7280;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition:
+                color 0.15s ease;
+        }
+
+
+        .nav-links a:hover {
+            color: #111827;
+        }
+
+
+        /* =========================================
+           Hero
+        ========================================= */
+
+        .hero {
+            max-width: 1120px;
+
+            margin: 0 auto;
+
+            padding:
+                105px 32px 80px;
+        }
+
+
+        .hero-label {
+            margin-bottom: 18px;
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.3px;
+        }
+
+
+        .hero h1 {
+            margin: 0;
+
+            color: #111827;
+
+            font-size: 56px;
+
+            line-height: 1.12;
+
+            letter-spacing: -2.8px;
+        }
+
+
+        .hero h1 span {
+            color: #6b7280;
+        }
+
+
+        .hero-description {
+            max-width: 720px;
+
+            margin:
+                24px 0 0;
+
+            color: #6b7280;
+
+            font-size: 18px;
+
+            line-height: 1.8;
+        }
+
+
+        .status-box {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 32px;
+
+            padding:
+                12px 16px;
+
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 9px;
+        }
+
+
+        .status-dot {
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+        }
+
+
+        .status-text {
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+
+        .status-text strong {
+            margin-left: 4px;
+
+            color: #111827;
+        }
+
+
+        /* =========================================
+           Section
+        ========================================= */
+
+        .section {
+            max-width: 1120px;
+
+            margin: 0 auto;
+
+            padding:
+                0 32px 70px;
+        }
+
+
+        .section-header {
+            margin-bottom: 22px;
+        }
+
+
+        .section-eyebrow {
+            margin-bottom: 7px;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+
+        .section-title {
+            margin: 0;
+
+            color: #111827;
+
+            font-size: 28px;
+
+            letter-spacing: -0.8px;
+        }
+
+
+        .section-description {
+            max-width: 700px;
+
+            margin:
+                10px 0 0;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================================
+           Resume
+        ========================================= */
+
+        .resume-card {
+            display: block;
+
+            position: relative;
+
+            padding: 34px;
+
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 15px;
+
+            text-decoration: none;
+
+            color: inherit;
+
+            transition:
+                transform 0.18s ease,
+                box-shadow 0.18s ease,
+                border-color 0.18s ease;
+        }
+
+
+        .resume-card:hover {
+            transform:
+                translateY(-4px);
+
+            border-color: #d1d5db;
+
+            box-shadow:
+                0 12px 30px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.07
+                );
+        }
+
+
+        .resume-top {
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+
+        .resume-icon {
+            margin-bottom: 18px;
+
+            font-size: 30px;
+        }
+
+
+        .resume-title {
+            margin-bottom: 10px;
+
+            color: #111827;
+
+            font-size: 23px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .resume-description {
+            max-width: 700px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        .resume-tags {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 22px;
+        }
+
+
+        .resume-tag {
+            padding:
+                6px 10px;
+
+            background: #f3f4f6;
+
+            border-radius: 6px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+
+        .resume-link {
+            color: #374151;
+
+            font-size: 13px;
+
+            font-weight: 650;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================
+           Project Grid
+        ========================================= */
+
+        .project-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .project-card {
+            position: relative;
+
+            display: block;
+
+            min-height: 220px;
+
+            padding: 30px;
+
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 15px;
+
+            text-decoration: none;
+
+            color: inherit;
+
+            transition:
+                transform 0.18s ease,
+                box-shadow 0.18s ease,
+                border-color 0.18s ease;
+        }
+
+
+        .project-card:hover {
+            transform:
+                translateY(-4px);
+
+            border-color: #d1d5db;
+
+            box-shadow:
+                0 12px 30px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.07
+                );
+        }
+
+
+        .project-icon {
+            margin-bottom: 18px;
+
+            font-size: 28px;
+        }
+
+
+        .project-title {
+            margin-bottom: 10px;
+
+            color: #111827;
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.4px;
+        }
+
+
+        .project-description {
+            max-width: 430px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        .project-link {
+            position: absolute;
+
+            right: 28px;
+
+            bottom: 26px;
+
+            color: #374151;
+
+            font-size: 13px;
+
+            font-weight: 650;
+        }
+
+
+        /* =========================================
+           Incident Lab
+        ========================================= */
+
+        .incident-card {
+            position: relative;
+
+            margin-top: 18px;
+
+            padding: 34px 32px;
+
+            overflow: hidden;
+
+            border-radius: 15px;
+
+            background: #111827;
+
+            color: white;
+        }
+
+
+        .incident-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 190px;
+
+            height: 190px;
+
+            top: -65px;
+
+            right: -45px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            border-radius: 50%;
+        }
+
+
+        .incident-icon {
+            margin-bottom: 18px;
+
+            font-size: 28px;
+        }
+
+
+        .incident-title {
+            margin-bottom: 10px;
+
+            color: white;
+
+            font-size: 21px;
+
+            font-weight: 700;
+        }
+
+
+        .incident-description {
+            max-width: 720px;
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        .incident-badge {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding:
+                6px 10px;
+
+            border-radius: 5px;
+
+            background: #1f2937;
+
+            color: #9ca3af;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.8px;
+        }
+
+
+        /* =========================================
+           Study
+        ========================================= */
+
+        .study-card {
+            display: block;
+
+            position: relative;
+
+            padding: 34px;
+
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 15px;
+
+            text-decoration: none;
+
+            color: inherit;
+
+            transition:
+                transform 0.18s ease,
+                box-shadow 0.18s ease,
+                border-color 0.18s ease;
+        }
+
+
+        .study-card:hover {
+            transform:
+                translateY(-4px);
+
+            border-color: #d1d5db;
+
+            box-shadow:
+                0 12px 30px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.07
+                );
+        }
+
+
+        .study-icon {
+            margin-bottom: 18px;
+
+            font-size: 28px;
+        }
+
+
+        .study-title {
+            margin-bottom: 10px;
+
+            color: #111827;
+
+            font-size: 21px;
+
+            font-weight: 700;
+        }
+
+
+        .study-description {
+            max-width: 740px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        .study-link {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            color: #374151;
+
+            font-size: 13px;
+
+            font-weight: 650;
+        }
+
+
+        /* =========================================
+           Footer
+        ========================================= */
+
+        footer {
+            padding:
+                35px 20px 45px;
+
+            color: #9ca3af;
+
+            font-size: 13px;
+
+            text-align: center;
+        }
+
+
+        /* =========================================
+           Responsive
+        ========================================= */
+
+        @media (
+            max-width: 768px
+        ) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+
+            .nav-links {
+                display: none;
+            }
+
+
+            .hero {
+                padding:
+                    70px 22px 60px;
+            }
+
+
+            .hero h1 {
+                font-size: 40px;
+
+                letter-spacing: -1.8px;
+            }
+
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+
+            .section {
+                padding:
+                    0 22px 55px;
+            }
+
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .resume-top {
+                flex-direction: column;
+            }
+
+
+            .resume-link {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         Navigation
+    ========================================= -->
+
+    <nav>
+
+        <a
+            href="/"
+            class="logo"
+        >
+            HEEWOON CLOUD LAB
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/resume">
+                Resume
+            </a>
+
+            <a href="/study">
+                Study
+            </a>
+
+            <a href="/architecture">
+                Architecture
+            </a>
+
+            <a href="/logs">
+                Logs
+            </a>
+
+            <a href="/grafana">
+                Grafana
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================
+         Hero
+    ========================================= -->
+
+    <section class="hero">
+
+        <div class="hero-label">
+            CLOUD / INFRASTRUCTURE / OBSERVABILITY
+        </div>
+
+
+        <h1>
+
+            Building and operating
+
+            <br>
+
+            <span>
+                cloud infrastructure.
+            </span>
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            AWS와 Kubernetes를 직접 구축하고 운영하며
+            인프라 구성부터 모니터링, 로그 분석,
+            장애 대응까지 경험하고 기록하고 있습니다.
+
+        </p>
+
+
+        <div class="status-box">
+
+            <div class="status-dot"></div>
+
+            <div class="status-text">
+
+                EKS Infrastructure
+
+                <strong>
+                    Operational
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         Resume
+    ========================================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-eyebrow">
+                Profile
+            </div>
+
+            <h2 class="section-title">
+                Resume
+            </h2>
+
+            <p class="section-description">
+
+                경력과 프로젝트 경험,
+                기술 스택과 경력기술서를
+                확인할 수 있습니다.
+
+            </p>
+
+        </div>
+
+
+        <a
+            href="/resume"
+            class="resume-card"
+        >
+
+            <div class="resume-top">
+
+                <div>
+
+                    <div class="resume-icon">
+                        📄
+                    </div>
+
+                    <div class="resume-title">
+                        Cloud / Infrastructure Engineer
+                    </div>
+
+                    <div class="resume-description">
+
+                        AWS 기반 클라우드 인프라 운영 및
+                        플랫폼 분석 경험을 바탕으로
+                        Kubernetes, Monitoring,
+                        Database 환경까지 다루고 있습니다.
+
+                    </div>
+
+
+                    <div class="resume-tags">
+
+                        <span class="resume-tag">
+                            AWS
+                        </span>
+
+                        <span class="resume-tag">
+                            EKS
+                        </span>
+
+                        <span class="resume-tag">
+                            Kubernetes
+                        </span>
+
+                        <span class="resume-tag">
+                            PostgreSQL
+                        </span>
+
+                        <span class="resume-tag">
+                            Monitoring
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="resume-link">
+                    View Resume →
+                </div>
+
+            </div>
+
+        </a>
+
+    </section>
+
+
+    <!-- =========================================
+         Projects
+    ========================================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-eyebrow">
+                Projects
+            </div>
+
+            <h2 class="section-title">
+                My Projects
+            </h2>
+
+            <p class="section-description">
+
+                직접 구축하고 운영하는 클라우드 인프라와
+                이를 관찰하고 분석하기 위한 도구들입니다.
+
+            </p>
+
+        </div>
+
+
+        <div class="project-grid">
+
+
+            <!-- Architecture -->
+
+            <a
+                href="/architecture"
+                class="project-card"
+            >
+
+                <div class="project-icon">
+                    🏗️
+                </div>
+
+                <div class="project-title">
+                    Architecture
+                </div>
+
+                <div class="project-description">
+
+                    VPC, EKS, ALB, Route 53,
+                    S3, IAM, Monitoring 등
+                    현재 구축한 AWS 인프라 구조를
+                    한눈에 확인할 수 있습니다.
+
+                </div>
+
+                <div class="project-link">
+                    View Architecture →
+                </div>
+
+            </a>
+
+
+            <!-- Monitoring -->
+
+            <a
+                href="/logs"
+                class="project-card"
+            >
+
+                <div class="project-icon">
+                    🔍
+                </div>
+
+                <div class="project-title">
+                    Monitoring
+                </div>
+
+                <div class="project-description">
+
+                    Grafana와 ALB Access Log를 통해
+                    실제 운영 환경의 상태와
+                    요청 흐름을 확인하고 분석합니다.
+
+                </div>
+
+                <div class="project-link">
+                    Open Monitoring →
+                </div>
+
+            </a>
+
+
+            <!-- Project GitHub -->
+
+            <a
+                href="https://github.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-card"
+            >
+
+                <div class="project-icon">
+                    💻
+                </div>
+
+                <div class="project-title">
+                    Project GitHub
+                </div>
+
+                <div class="project-description">
+
+                    현재 구축하고 있는 프로젝트의
+                    소스 코드, Kubernetes 설정,
+                    인프라 구성과 문제 해결 과정을
+                    확인할 수 있습니다.
+
+                </div>
+
+                <div class="project-link">
+                    Open Repository →
+                </div>
+
+            </a>
+
+
+            <!-- Future Incident Lab -->
+
+            <div
+                class="project-card"
+            >
+
+                <div class="project-icon">
+                    🚨
+                </div>
+
+                <div class="project-title">
+                    Incident Lab
+                </div>
+
+                <div class="project-description">
+
+                    Kubernetes 환경에서 장애를 의도적으로
+                    발생시키고 Grafana와 로그를 통해
+                    이상 징후를 확인한 뒤 원인을 분석하고
+                    대응 및 복구하는 기능을 구현할 예정입니다.
+
+                </div>
+
+                <div class="project-link">
+                    Coming Soon
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         Study
+    ========================================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-eyebrow">
+                Learning
+            </div>
+
+            <h2 class="section-title">
+                Study
+            </h2>
+
+            <p class="section-description">
+
+                AWS, Kubernetes, Docker,
+                네트워크와 스토리지 등
+                학습하면서 정리한 기술 내용을
+                별도의 학습 Repository에서 관리하고 있습니다.
+
+            </p>
+
+        </div>
+
+
+        <a
+            href="/study"
+            class="study-card"
+        >
+
+            <div class="study-icon">
+                📚
+            </div>
+
+
+            <div class="study-title">
+                Infrastructure Study
+            </div>
+
+
+            <div class="study-description">
+
+                Kubernetes Architecture,
+                Service, Ingress, Storage,
+                AWS VPC, EKS, IAM, S3 등
+                직접 공부하고 실습한 내용을
+                GitHub 기반으로 정리하고 있습니다.
+
+            </div>
+
+
+            <div class="study-link">
+                View Study →
+            </div>
+
+        </a>
+
+    </section>
+
+
+    <!-- =========================================
+         Footer
+    ========================================= -->
+
+    <footer>
+
+        Heewoon Cloud Lab
+        · AWS · Kubernetes · Observability
+
+    </footer>
+
+
+</body>
+
+</html>

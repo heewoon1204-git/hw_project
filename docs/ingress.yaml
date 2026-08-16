@@ -1,0 +1,70 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: application-ingress
+  namespace: application
+
+  annotations:
+    # ALB
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+
+    # IngressGroup
+    alb.ingress.kubernetes.io/group.name: heewoon1204
+
+    # 우선순위
+    alb.ingress.kubernetes.io/group.order: "100"
+
+
+    # HTTP :80 + HTTPS :443
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
+
+    # ACM 인증서
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:ap-northeast-2:245067526307:certificate/2ed35465-7537-4d37-94b8-caa702c8140f"
+
+    # HTTP → HTTPS redirect
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+
+    # ExternalDNS
+    external-dns.alpha.kubernetes.io/hostname: www.heewoon1204.com
+
+    # apex domain → www redirect
+    alb.ingress.kubernetes.io/actions.redirect-to-www: >
+      {
+        "type": "redirect",
+        "redirectConfig": {
+          "protocol": "HTTPS",
+          "host": "www.heewoon1204.com",
+          "path": "/#{path}",
+          "query": "#{query}",
+          "statusCode": "HTTP_301"
+        }
+      }
+
+spec:
+  ingressClassName: alb
+
+  rules:
+    - host: heewoon1204.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: redirect-to-www
+                port:
+                  name: use-annotation
+
+
+    - host: www.heewoon1204.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx
+                port:
+                  number: 80
