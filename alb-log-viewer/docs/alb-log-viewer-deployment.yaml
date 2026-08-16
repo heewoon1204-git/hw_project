@@ -16,6 +16,6 @@ spec:
       serviceAccountName: alb-log-viewer-sa
       containers:
         - name: alb-log-viewer
-          image: 245067526307.dkr.ecr.ap-northeast-2.amazonaws.com/alb-log-viewer:1.0
+          image: 245067526307.dkr.ecr.ap-northeast-2.amazonaws.com/alb-log-viewer:1.1
           ports:
             - containerPort: 5001

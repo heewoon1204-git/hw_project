@@ -1,15 +1,31 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
+
 metadata:
   name: alb-log-viewer-ingress
   namespace: monitoring
+
   annotations:
+    # 기존 ALB와 공유
     alb.ingress.kubernetes.io/group.name: heewoon1204
+
+    # 그룹 우선순위
+    alb.ingress.kubernetes.io/group.order: "10"
+
     alb.ingress.kubernetes.io/target-type: ip
+
+    # 이 Ingress의 Rule을 HTTPS :443 listener에 연결
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+
+    # ExternalDNS
+    external-dns.alpha.kubernetes.io/hostname: www.heewoon1204.com
+
 spec:
   ingressClassName: alb
+
   rules:
-    - http:
+    - host: www.heewoon1204.com
+      http:
         paths:
           - path: /logs
             pathType: Prefix
