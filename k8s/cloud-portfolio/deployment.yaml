@@ -1,41 +1,149 @@
-apiVersion: apps/v1
-kind: Deployment
+name: Build and Push Cloud Portfolio
 
-metadata:
-  name: cloud-portfolio
-  namespace: application
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "cloud-portfolio/**"
 
-spec:
-  replicas: 2
+permissions:
+  contents: write
+  id-token: write
 
-  selector:
-    matchLabels:
-      app: cloud-portfolio
+env:
+  AWS_REGION: ap-northeast-2
+  ECR_REPOSITORY: cloud-portfolio
+  MANIFEST_FILE: k8s/cloud-portfolio/deployment.yaml
 
-  template:
-    metadata:
-      labels:
-        app: cloud-portfolio
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
 
-    spec:
-      containers:
-        - name: cloud-portfolio
+    steps:
 
-          image: 245067526307.dkr.ecr.ap-northeast-2.amazonaws.com/cloud-portfolio:cc900d7efd7ac0effeeb0aecedd2e76ee0192bd1
+      # ==========================================
+      # 1. Checkout
+      # ==========================================
 
-          ports:
-            - containerPort: 5001
-              protocol: TCP
+      - name: Checkout
+        uses: actions/checkout@v6
 
-          envFrom:
-            - secretRef:
-                name: cloud-portfolio-db
 
-          resources:
-            requests:
-              cpu: 100m
-              memory: 128Mi
+      # ==========================================
+      # 2. AWS OIDC Authentication
+      # ==========================================
 
-            limits:
-              cpu: 500m
-              memory: 512Mi
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6.2.3
+        with:
+          role-to-assume: arn:aws:iam::245067526307:role/github-actions-hw-project
+          aws-region: ${{ env.AWS_REGION }}
+
+
+      # ==========================================
+      # 3. Verify AWS Identity
+      # ==========================================
+
+      - name: Verify AWS identity
+        run: |
+          aws sts get-caller-identity
+
+
+      # ==========================================
+      # 4. Login to ECR
+      # ==========================================
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2.1.6
+
+
+      # ==========================================
+      # 5. Build and Push Docker Image
+      # ==========================================
+
+      - name: Build and push image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+
+        run: |
+          docker build \
+            --platform linux/amd64 \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+            ./cloud-portfolio
+
+          docker push \
+            $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+
+      # ==========================================
+      # 6. Update Kubernetes Manifest
+      # ==========================================
+
+      - name: Update image tag in manifest
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+
+          manifest = Path(os.environ["MANIFEST_FILE"])
+
+          image = (
+              f'{os.environ["ECR_REGISTRY"]}/'
+              f'{os.environ["ECR_REPOSITORY"]}:'
+              f'{os.environ["IMAGE_TAG"]}'
+          )
+
+          text = manifest.read_text()
+
+          pattern = r'(^\s*image:\s*).*$'
+          updated, count = re.subn(
+              pattern,
+              rf'\1{image}',
+              text,
+              count=1,
+              flags=re.MULTILINE
+          )
+
+          if count != 1:
+              raise SystemExit(
+                  "cloud-portfolio image entry not found"
+              )
+
+          manifest.write_text(updated)
+
+          print(f"Updated image to: {image}")
+          PY
+
+
+      # ==========================================
+      # 7. Commit and Push Manifest
+      # ==========================================
+
+      - name: Commit and push manifest
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+
+        run: |
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add "$MANIFEST_FILE"
+
+          if git diff --cached --quiet; then
+            echo "No manifest changes detected."
+            exit 0
+          fi
+
+          git commit \
+            -m "chore: update cloud-portfolio image to ${IMAGE_TAG}"
+
+          git push
