@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Project | Heewoon Cloud Lab</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: #f6f7f9;
+            color: #1f2937;
+        }
+
+
+        /* =========================================
+           Navigation
+        ========================================= */
+
+        nav {
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            height: 68px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 48px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.94
+            );
+
+            backdrop-filter: blur(10px);
+
+            border-bottom:
+                1px solid #e5e7eb;
+        }
+
+
+        .logo {
+            color: #111827;
+
+            text-decoration: none;
+
+            font-size: 19px;
+
+            font-weight: 750;
+
+            letter-spacing: -0.4px;
+        }
+
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 26px;
+        }
+
+
+        .nav-links a {
+            color: #6b7280;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: color 0.15s ease;
+        }
+
+
+        .nav-links a:hover {
+            color: #111827;
+        }
+
+
+        /* =========================================
+           Page
+        ========================================= */
+
+        .page {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            padding:
+                80px 32px 90px;
+        }
+
+
+        .eyebrow {
+            margin-bottom: 12px;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+
+        .page-header {
+            margin-bottom: 52px;
+        }
+
+
+        .page-header h1 {
+            margin: 0;
+
+            color: #111827;
+
+            font-size: 48px;
+
+            line-height: 1.15;
+
+            letter-spacing: -2px;
+        }
+
+
+        .page-header p {
+            max-width: 780px;
+
+            margin-top: 20px;
+
+            color: #6b7280;
+
+            font-size: 17px;
+
+            line-height: 1.85;
+        }
+
+
+        .project-links {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+
+        .button {
+            display: inline-block;
+
+            padding:
+                10px 15px;
+
+            border:
+                1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            background: white;
+
+            color: #374151;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 650;
+        }
+
+
+        .button:hover {
+            background: #f9fafb;
+        }
+
+
+        /* =========================================
+           Cards
+        ========================================= */
+
+        .section {
+            margin-bottom: 24px;
+        }
+
+
+        .card {
+            padding: 32px;
+
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 15px;
+        }
+
+
+        .section-title {
+            margin: 0 0 18px;
+
+            color: #111827;
+
+            font-size: 23px;
+
+            letter-spacing: -0.6px;
+        }
+
+
+        .section-description {
+            margin-bottom: 24px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.75;
+        }
+
+
+        /* =========================================
+           Overview
+        ========================================= */
+
+        .overview-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .overview-item {
+            padding: 20px;
+
+            background: #fafafa;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 10px;
+        }
+
+
+        .overview-label {
+            margin-bottom: 7px;
+
+            color: #9ca3af;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+        }
+
+
+        .overview-value {
+            color: #111827;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           Architecture Flow
+        ========================================= */
+
+        .flow {
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 10px;
+
+            align-items: center;
+        }
+
+
+        .flow-item {
+            padding: 18px 12px;
+
+            background: #f9fafb;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 9px;
+
+            text-align: center;
+        }
+
+
+        .flow-title {
+            color: #111827;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .flow-description {
+            margin-top: 5px;
+
+            color: #9ca3af;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+
+        .flow-arrow {
+            color: #9ca3af;
+
+            text-align: center;
+
+            font-size: 18px;
+        }
+
+
+        /* =========================================
+           Technology Grid
+        ========================================= */
+
+        .tech-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .tech-card {
+            padding: 21px;
+
+            background: #fafafa;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 10px;
+        }
+
+
+        .tech-title {
+            margin-bottom: 8px;
+
+            color: #111827;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        .tech-description {
+            color: #6b7280;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================================
+           Current Status
+        ========================================= */
+
+        .status-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 14px;
+        }
+
+
+        .status-item {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 12px;
+
+            padding: 18px;
+
+            background: #fafafa;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 10px;
+        }
+
+
+        .status-dot {
+            width: 9px;
+
+            height: 9px;
+
+            flex: 0 0 auto;
+
+            margin-top: 5px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+        }
+
+
+        .status-title {
+            color: #111827;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        .status-description {
+            margin-top: 5px;
+
+            color: #6b7280;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           Incident Lab
+        ========================================= */
+
+        .incident-card {
+            padding: 32px;
+
+            background: #111827;
+
+            border-radius: 15px;
+
+            color: white;
+        }
+
+
+        .incident-title {
+            margin-bottom: 12px;
+
+            color: white;
+
+            font-size: 23px;
+
+            font-weight: 700;
+        }
+
+
+        .incident-description {
+            max-width: 760px;
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+
+        .incident-flow {
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 10px;
+
+            margin-top: 25px;
+
+            align-items: center;
+        }
+
+
+        .incident-step {
+            padding: 16px 10px;
+
+            background: #1f2937;
+
+            border:
+                1px solid #374151;
+
+            border-radius: 8px;
+
+            text-align: center;
+        }
+
+
+        .incident-number {
+            margin-bottom: 7px;
+
+            color: #9ca3af;
+
+            font-size: 10px;
+
+            font-weight: 700;
+        }
+
+
+        .incident-step-title {
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .incident-arrow {
+            color: #6b7280;
+
+            text-align: center;
+        }
+
+
+        /* =========================================
+           GitHub
+        ========================================= */
+
+        .github-card {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 25px;
+
+            background: #fafafa;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 11px;
+        }
+
+
+        .github-title {
+            color: #111827;
+
+            font-size: 16px;
+
+            font-weight: 700;
+        }
+
+
+        .github-description {
+            margin-top: 6px;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+
+        .github-link {
+            flex: 0 0 auto;
+
+            color: #374151;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 650;
+        }
+
+
+        /* =========================================
+           Footer
+        ========================================= */
+
+        footer {
+            padding:
+                30px 20px 45px;
+
+            color: #9ca3af;
+
+            font-size: 13px;
+
+            text-align: center;
+        }
+
+
+        /* =========================================
+           Responsive
+        ========================================= */
+
+        @media (max-width: 768px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+
+            .nav-links {
+                display: none;
+            }
+
+
+            .page {
+                padding:
+                    60px 20px 70px;
+            }
+
+
+            .page-header h1 {
+                font-size: 38px;
+            }
+
+
+            .overview-grid,
+            .tech-grid,
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .flow,
+            .incident-flow {
+                grid-template-columns: 1fr;
+            }
+
+
+            .flow-arrow,
+            .incident-arrow {
+                transform: rotate(90deg);
+            }
+
+
+            .github-card {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         Navigation
+    ========================================= -->
+
+    <nav>
+
+        <a
+            href="/"
+            class="logo"
+        >
+            HEEWOON CLOUD LAB
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/resume">
+                Resume
+            </a>
+
+            <a href="/study">
+                Study
+            </a>
+
+            <a href="/architecture">
+                Architecture
+            </a>
+
+            <a href="/logs">
+                Logs
+            </a>
+
+            <a href="/grafana">
+                Grafana
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="page">
+
+
+        <!-- =====================================
+             Header
+        ===================================== -->
+
+        <header class="page-header">
+
+            <div class="eyebrow">
+                Project / AWS EKS / Incident Lab
+            </div>
+
+
+            <h1>
+                AWS EKS Infrastructure
+                <br>
+                & Incident Lab
+            </h1>
+
+
+            <p>
+
+                AWS EKS 기반 클라우드 인프라를 직접 구축하고,
+                Application과 Monitoring 환경을 연결한 뒤
+                실제 운영 환경에서 발생할 수 있는 장애를
+                재현하고 분석할 수 있는 환경으로 확장하고 있습니다.
+
+            </p>
+
+
+            <div class="project-links">
+
+                <a
+                    href="/architecture"
+                    class="button"
+                >
+                    View Architecture
+                </a>
+
+
+                <a
+                    href="/logs"
+                    class="button"
+                >
+                    Open ALB Log Viewer
+                </a>
+
+
+                <a
+                    href="/grafana"
+                    class="button"
+                >
+                    Open Grafana
+                </a>
+
+
+                <a
+                    href="https://github.com/heewoon1204-git/hw_project"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button"
+                >
+                    Project GitHub ↗
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================
+             Overview
+        ===================================== -->
+
+        <section class="section">
+
+            <div class="card">
+
+                <h2 class="section-title">
+                    Project Overview
+                </h2>
+
+
+                <p class="section-description">
+
+                    단순한 Kubernetes 클러스터 구축을 넘어
+                    네트워크, 컴퓨팅, 로드밸런싱,
+                    스토리지, 모니터링과 로그 분석까지
+                    하나의 운영 환경으로 연결하는 것을 목표로 합니다.
+
+                </p>
+
+
+                <div class="overview-grid">
+
+
+                    <div class="overview-item">
+
+                        <div class="overview-label">
+                            Platform
+                        </div>
+
+                        <div class="overview-value">
+                            Amazon EKS
+                        </div>
+
+                    </div>
+
+
+                    <div class="overview-item">
+
+                        <div class="overview-label">
+                            Region
+                        </div>
+
+                        <div class="overview-value">
+                            ap-northeast-2
+                        </div>
+
+                    </div>
+
+
+                    <div class="overview-item">
+
+                        <div class="overview-label">
+                            Network
+                        </div>
+
+                        <div class="overview-value">
+                            VPC / Multi-AZ
+                        </div>
+
+                    </div>
+
+
+                    <div class="overview-item">
+
+                        <div class="overview-label">
+                            Load Balancing
+                        </div>
+
+                        <div class="overview-value">
+                            AWS ALB / IngressGroup
+                        </div>
+
+                    </div>
+
+
+                    <div class="overview-item">
+
+                        <div class="overview-label">
+                            Observability
+                        </div>
+
+                        <div class="overview-value">
+                            Prometheus / Grafana / ALB Logs
+                        </div>
+
+                    </div>
+
+
+                    <div class="overview-item">
+
+                        <div class="overview-label">
+                            Final Goal
+                        </div>
+
+                        <div class="overview-value">
+                            Incident Response Lab
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             Architecture Flow
+        ===================================== -->
+
+        <section class="section">
+
+            <div class="card">
+
+                <h2 class="section-title">
+                    Service Architecture
+                </h2>
+
+
+                <p class="section-description">
+
+                    현재 운영 중인 서비스와
+                    주요 구성 요소 간의 연결 구조입니다.
+
+                </p>
+
+
+                <div class="flow">
+
+
+                    <div class="flow-item">
+
+                        <div class="flow-title">
+                            Route 53
+                        </div>
+
+                        <div class="flow-description">
+                            Domain / DNS
+                        </div>
+
+                    </div>
+
+
+                    <div class="flow-arrow">
+                        →
+                    </div>
+
+
+                    <div class="flow-item">
+
+                        <div class="flow-title">
+                            ALB
+                        </div>
+
+                        <div class="flow-description">
+                            HTTPS :443
+                            <br>
+                            Path Routing
+                        </div>
+
+                    </div>
+
+
+                    <div class="flow-arrow">
+                        →
+                    </div>
+
+
+                    <div class="flow-item">
+
+                        <div class="flow-title">
+                            Kubernetes
+                        </div>
+
+                        <div class="flow-description">
+                            Ingress / Service
+                        </div>
+
+                    </div>
+
+
+                    <div class="flow-arrow">
+                        →
+                    </div>
+
+
+                    <div class="flow-item">
+
+                        <div class="flow-title">
+                            Workloads
+                        </div>
+
+                        <div class="flow-description">
+                            Application /
+                            Monitoring
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             Core Components
+        ===================================== -->
+
+        <section class="section">
+
+            <div class="card">
+
+                <h2 class="section-title">
+                    Core Components
+                </h2>
+
+
+                <div class="tech-grid">
+
+
+                    <div class="tech-card">
+
+                        <div class="tech-title">
+                            VPC
+                        </div>
+
+                        <div class="tech-description">
+
+                            10.0.0.0/16 VPC와
+                            Public / Private Subnet 기반의
+                            네트워크 구성
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="tech-card">
+
+                        <div class="tech-title">
+                            Amazon EKS
+                        </div>
+
+                        <div class="tech-description">
+
+                            Application과 Monitoring
+                            Node Group을 분리한
+                            Kubernetes 환경
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="tech-card">
+
+                        <div class="tech-title">
+                            Application Load Balancer
+                        </div>
+
+                        <div class="tech-description">
+
+                            HTTPS Listener와
+                            IngressGroup을 이용한
+                            Path 기반 라우팅
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="tech-card">
+
+                        <div class="tech-title">
+                            Route 53 / ExternalDNS
+                        </div>
+
+                        <div class="tech-description">
+
+                            Custom Domain 관리와
+                            ALB 주소 자동 연동
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="tech-card">
+
+                        <div class="tech-title">
+                            S3
+                        </div>
+
+                        <div class="tech-description">
+
+                            ALB Access Log 저장 및
+                            Log Viewer 분석 대상 데이터 관리
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="tech-card">
+
+                        <div class="tech-title">
+                            EBS / RDS
+                        </div>
+
+                        <div class="tech-description">
+
+                            Grafana Persistence와
+                            PostgreSQL Database 환경
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             Monitoring
+        ===================================== -->
+
+        <section class="section">
+
+            <div class="card">
+
+                <h2 class="section-title">
+                    Monitoring & Observability
+                </h2>
+
+
+                <p class="section-description">
+
+                    서비스 상태를 Metric과 Log 두 가지 관점에서
+                    확인할 수 있도록 구성했습니다.
+
+                </p>
+
+
+                <div class="status-grid">
+
+
+                    <div class="status-item">
+
+                        <div class="status-dot"></div>
+
+                        <div>
+
+                            <div class="status-title">
+                                Prometheus
+                            </div>
+
+                            <div class="status-description">
+
+                                Kubernetes와
+                                Application Metric 수집
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="/grafana"
+                        class="monitoring-link-card status-item"
+                    >
+
+                        <div class="status-dot"></div>
+
+                        <div>
+
+                            <div class="status-title">
+                                Grafana
+                            </div>
+
+                            <div class="status-description">
+
+                                Resource 및
+                                서비스 상태 시각화
+
+                                <br><br>
+
+                                Open Grafana →
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="/logs"
+                        class="monitoring-link-card status-item"
+                    >
+
+                        <div class="status-dot"></div>
+
+                        <div>
+
+                            <div class="status-title">
+                                ALB Log Viewer
+                            </div>
+
+                            <div class="status-description">
+
+                                S3에 저장된
+                                ALB Access Log를 조회하고
+                                HTTP 요청 및 오류를 분석
+
+                                <br><br>
+
+                                Open ALB Log Viewer →
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <div class="status-item">
+
+                        <div class="status-dot"></div>
+
+                        <div>
+
+                            <div class="status-title">
+                                ExternalDNS
+                            </div>
+
+                            <div class="status-description">
+
+                                Kubernetes Ingress와
+                                Route 53 DNS 레코드 연동
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             Current Implementation
+        ===================================== -->
+
+        <section class="section">
+
+            <div class="card">
+
+                <h2 class="section-title">
+                    Current Implementation
+                </h2>
+
+
+                <div class="status-grid">
+
+
+                    <div class="status-item">
+
+                        <div class="status-dot"></div>
+
+                        <div>
+
+                            <div class="status-title">
+                                Multi-AZ EKS
+                            </div>
+
+                            <div class="status-description">
+
+                                두 Availability Zone을 이용한
+                                EKS Node 분산 배치
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="status-item">
+
+                        <div class="status-dot"></div>
+
+                        <div>
+
+                            <div class="status-title">
+                                IngressGroup
+                            </div>
+
+                            <div class="status-description">
+
+                                하나의 ALB에서
+                                Application / Monitoring 서비스 라우팅
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="status-item">
+
+                        <div class="status-dot"></div>
+
+                        <div>
+
+                            <div class="status-title">
+                                HTTPS
+                            </div>
+
+                            <div class="status-description">
+
+                                ACM 인증서를 이용한
+                                HTTPS Listener 구성
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="status-item">
+
+                        <div class="status-dot"></div>
+
+                        <div>
+
+                            <div class="status-title">
+                                Persistent Storage
+                            </div>
+
+                            <div class="status-description">
+
+                                Grafana 데이터를 위한
+                                EBS 기반 Persistence 구성
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="status-item">
+
+                        <div class="status-dot"></div>
+
+                        <div>
+
+                            <div class="status-title">
+                                IAM / Pod Identity
+                            </div>
+
+                            <div class="status-description">
+
+                                Application Pod에서
+                                AWS 리소스에 접근하는 인증 구성
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="status-item">
+
+                        <div class="status-dot"></div>
+
+                        <div>
+
+                            <div class="status-title">
+                                ALB Access Logs
+                            </div>
+
+                            <div class="status-description">
+
+                                S3 → Flask Log Viewer를 통한
+                                요청 로그 분석 환경 구성
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             Incident Lab
+        ===================================== -->
+
+        <section class="section">
+
+            <div class="incident-card">
+
+                <div class="incident-title">
+                    Incident Lab
+                </div>
+
+
+                <div class="incident-description">
+
+                    현재 구축한 Monitoring 환경을 기반으로
+                    실제 Kubernetes 장애를 의도적으로 재현하고,
+                    Metric과 Log를 통해 이상 징후를 확인한 뒤
+                    원인 분석과 대응, 복구까지 검증하는 환경으로
+                    확장할 예정입니다.
+
+                </div>
+
+
+                <div class="incident-flow">
+
+
+                    <div class="incident-step">
+
+                        <div class="incident-number">
+                            01
+                        </div>
+
+                        <div class="incident-step-title">
+                            Incident
+                        </div>
+
+                    </div>
+
+
+                    <div class="incident-arrow">
+                        →
+                    </div>
+
+
+                    <div class="incident-step">
+
+                        <div class="incident-number">
+                            02
+                        </div>
+
+                        <div class="incident-step-title">
+                            Detect
+                        </div>
+
+                    </div>
+
+
+                    <div class="incident-arrow">
+                        →
+                    </div>
+
+
+                    <div class="incident-step">
+
+                        <div class="incident-number">
+                            03
+                        </div>
+
+                        <div class="incident-step-title">
+                            Analyze
+                        </div>
+
+                    </div>
+
+
+                    <div class="incident-arrow">
+                        →
+                    </div>
+
+
+                    <div class="incident-step">
+
+                        <div class="incident-number">
+                            04
+                        </div>
+
+                        <div class="incident-step-title">
+                            Recover
+                        </div>
+
+                    </div>
+
+
+                    <div class="incident-arrow">
+                        →
+                    </div>
+
+
+                    <div class="incident-step">
+
+                        <div class="incident-number">
+                            05
+                        </div>
+
+                        <div class="incident-step-title">
+                            Verify
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             GitHub
+        ===================================== -->
+
+        <section class="section">
+
+            <div class="card">
+
+                <h2 class="section-title">
+                    Project Repository
+                </h2>
+
+
+                <div class="github-card">
+
+                    <div>
+
+                        <div class="github-title">
+                            hw_project
+                        </div>
+
+                        <div class="github-description">
+
+                            EKS Infrastructure,
+                            Kubernetes Configuration,
+                            Monitoring 및
+                            Incident Lab 구현 과정
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="https://github.com/heewoon1204-git/hw_project"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="github-link"
+                    >
+                        Open GitHub ↗
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        Heewoon Cloud Lab
+        · AWS · Kubernetes · Observability
+
+    </footer>
+
+
+</body>
+
+</html>

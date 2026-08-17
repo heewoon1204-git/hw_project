@@ -105,6 +105,13 @@ def study():
         categories=categories
     )
 
+@app.route("/monitoring")
+def monitoring():
+    return render_template("monitoring.html")
+
+@app.route("/project")
+def project():
+    return render_template("project.html")
 
 
 @app.route("/architecture")

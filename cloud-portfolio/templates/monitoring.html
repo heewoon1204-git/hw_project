@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Monitoring | Heewoon Cloud Lab</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: #f6f7f9;
+            color: #1f2937;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            height: 68px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 48px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.94
+            );
+
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo {
+            color: #111827;
+            text-decoration: none;
+
+            font-size: 19px;
+            font-weight: 750;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 26px;
+        }
+
+        .nav-links a {
+            color: #6b7280;
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #111827;
+        }
+
+        .page {
+            max-width: 1080px;
+
+            margin: 0 auto;
+
+            padding:
+                80px 32px 90px;
+        }
+
+        .eyebrow {
+            margin-bottom: 12px;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .page-header {
+            margin-bottom: 45px;
+        }
+
+        .page-header h1 {
+            margin: 0;
+
+            color: #111827;
+
+            font-size: 48px;
+
+            line-height: 1.15;
+
+            letter-spacing: -2px;
+        }
+
+        .page-header p {
+            max-width: 720px;
+
+            margin-top: 18px;
+
+            color: #6b7280;
+
+            font-size: 16px;
+
+            line-height: 1.8;
+        }
+
+        .monitoring-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .monitoring-card {
+            display: block;
+
+            min-height: 280px;
+
+            padding: 30px;
+
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 15px;
+
+            color: inherit;
+
+            text-decoration: none;
+
+            transition:
+                transform 0.18s ease,
+                box-shadow 0.18s ease,
+                border-color 0.18s ease;
+        }
+
+        .monitoring-card:hover {
+            transform:
+                translateY(-4px);
+
+            border-color: #d1d5db;
+
+            box-shadow:
+                0 12px 30px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.07
+                );
+        }
+
+        .icon {
+            margin-bottom: 20px;
+
+            font-size: 32px;
+        }
+
+        .card-title {
+            margin-bottom: 12px;
+
+            color: #111827;
+
+            font-size: 22px;
+
+            font-weight: 700;
+        }
+
+        .card-description {
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+        .card-link {
+            display: inline-block;
+
+            margin-top: 22px;
+
+            color: #374151;
+
+            font-size: 13px;
+
+            font-weight: 650;
+        }
+
+        .architecture-note {
+            margin-top: 22px;
+
+            padding: 25px 28px;
+
+            background: #111827;
+
+            border-radius: 14px;
+
+            color: white;
+        }
+
+        .architecture-note-title {
+            margin-bottom: 8px;
+
+            font-size: 17px;
+
+            font-weight: 700;
+        }
+
+        .architecture-note-description {
+            color: #cbd5e1;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        footer {
+            padding:
+                30px 20px 45px;
+
+            color: #9ca3af;
+
+            font-size: 13px;
+
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page {
+                padding:
+                    60px 22px 70px;
+            }
+
+            .page-header h1 {
+                font-size: 39px;
+            }
+
+            .monitoring-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <nav>
+
+        <a
+            href="/"
+            class="logo"
+        >
+            HEEWOON CLOUD LAB
+        </a>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+            <a href="/resume">Resume</a>
+            <a href="/study">Study</a>
+            <a href="/architecture">Architecture</a>
+            <a href="/logs">Logs</a>
+            <a href="/grafana">Grafana</a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="page">
+
+        <header class="page-header">
+
+            <div class="eyebrow">
+                Monitoring / Observability
+            </div>
+
+            <h1>
+                Monitoring
+            </h1>
+
+            <p>
+
+                실제 EKS 환경에서 발생하는
+                Metric과 Application 요청 로그를
+                각각 Grafana와 ALB Log Viewer를 통해
+                확인하고 분석할 수 있습니다.
+
+            </p>
+
+        </header>
+
+
+        <section class="monitoring-grid">
+
+
+            <!-- Grafana -->
+
+            <a
+                href="/grafana"
+                class="monitoring-card"
+            >
+
+                <div class="icon">
+                    📊
+                </div>
+
+                <div class="card-title">
+                    Grafana
+                </div>
+
+                <div class="card-description">
+
+                    Prometheus에서 수집한
+                    Kubernetes 및 Application Metric을
+                    시각화합니다.
+
+                    <br><br>
+
+                    Resource 사용량,
+                    Pod 상태와 서비스 상태 등을
+                    Dashboard에서 확인할 수 있습니다.
+
+                </div>
+
+                <div class="card-link">
+                    Open Grafana →
+                </div>
+
+            </a>
+
+
+            <!-- ALB Log Viewer -->
+
+            <a
+                href="/logs"
+                class="monitoring-card"
+            >
+
+                <div class="icon">
+                    🔍
+                </div>
+
+                <div class="card-title">
+                    ALB Log Viewer
+                </div>
+
+                <div class="card-description">
+
+                    S3에 저장된
+                    Application Load Balancer Access Log를
+                    조회합니다.
+
+                    <br><br>
+
+                    요청 경로,
+                    HTTP Status,
+                    응답 시간과 같은 정보를 확인하여
+                    요청 흐름과 오류를 분석할 수 있습니다.
+
+                </div>
+
+                <div class="card-link">
+                    Open ALB Log Viewer →
+                </div>
+
+            </a>
+
+        </section>
+
+
+        <section class="architecture-note">
+
+            <div class="architecture-note-title">
+                Observability Flow
+            </div>
+
+            <div class="architecture-note-description">
+
+                Kubernetes / Application
+                → Prometheus
+                → Grafana
+
+                <br>
+
+                ALB
+                → S3 Access Logs
+                → ALB Log Viewer
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        Heewoon Cloud Lab
+        · AWS · Kubernetes · Observability
+
+    </footer>
+
+</body>
+
+</html>
