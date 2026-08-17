@@ -21,10 +21,14 @@ spec:
       containers:
         - name: cloud-portfolio
 
-          image: 245067526307.dkr.ecr.ap-northeast-2.amazonaws.com/cloud-portfolio:1.1
+          image: 245067526307.dkr.ecr.ap-northeast-2.amazonaws.com/cloud-portfolio:1.6
 
           ports:
             - containerPort: 5001
+
+          envFrom:
+            - secretRef:
+                name: cloud-portfolio-db
 
           resources:
             requests:

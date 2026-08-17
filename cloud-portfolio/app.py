@@ -1,6 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import requests
 import markdown
+import os
+import psycopg
 
 
 app = Flask(__name__)
@@ -47,6 +49,27 @@ def get_github_contents(path=""):
 
 
 # ============================================================
+# PostgreSQL Connection
+# ============================================================
+
+def get_db_connection():
+    """
+    Kubernetes Secret으로 주입된 환경변수를 이용해
+    RDS PostgreSQL에 연결한다.
+    """
+
+    return psycopg.connect(
+        host=os.environ["DB_HOST"],
+        port=int(os.environ.get("DB_PORT", 5432)),
+        dbname=os.environ.get("DB_NAME", "postgres"),
+        user=os.environ["DB_USER"],
+        password=os.environ["DB_PASSWORD"],
+        sslmode="require",
+        connect_timeout=5,
+    )
+
+
+# ============================================================
 # Home
 # ============================================================
 
@@ -73,6 +96,51 @@ def resume():
 
     return render_template(
         "resume.html"
+    )
+
+
+# ============================================================
+# Project
+# ============================================================
+
+@app.route("/project")
+def project():
+    """
+    프로젝트 소개 페이지
+    """
+
+    return render_template(
+        "project.html"
+    )
+
+
+# ============================================================
+# Architecture
+# ============================================================
+
+@app.route("/architecture")
+def architecture():
+    """
+    AWS / EKS Architecture 페이지
+    """
+
+    return render_template(
+        "architecture.html"
+    )
+
+
+# ============================================================
+# Monitoring
+# ============================================================
+
+@app.route("/monitoring")
+def monitoring():
+    """
+    Monitoring 선택 페이지
+    """
+
+    return render_template(
+        "monitoring.html"
     )
 
 
@@ -105,18 +173,6 @@ def study():
         categories=categories
     )
 
-@app.route("/monitoring")
-def monitoring():
-    return render_template("monitoring.html")
-
-@app.route("/project")
-def project():
-    return render_template("project.html")
-
-
-@app.route("/architecture")
-def architecture():
-    return render_template("architecture.html")
 
 # ============================================================
 # Study - Documents in Category
@@ -215,6 +271,106 @@ def study_document(category, filename):
         filename=filename,
         markdown_html=markdown_html
     )
+
+
+# ============================================================
+# Database Health Check
+# ============================================================
+
+@app.route("/api/db-health")
+def db_health():
+
+    try:
+        with get_db_connection() as conn:
+
+            with conn.cursor() as cur:
+                cur.execute("SELECT 1")
+                result = cur.fetchone()
+
+        if result == (1,):
+            return jsonify({
+                "database": "connected"
+            }), 200
+
+        return jsonify({
+            "database": "unexpected_response"
+        }), 500
+
+    except Exception as e:
+
+        print(type(e).__name__)
+        print(e)
+
+        return jsonify({
+            "database": "disconnected",
+            "detail": str(e)
+        }), 503
+
+
+# ============================================================
+# Incidents - List
+# ============================================================
+
+@app.route("/api/incidents", methods=["GET"])
+def get_incidents():
+
+    try:
+        with get_db_connection() as conn:
+
+            with conn.cursor() as cur:
+
+                cur.execute("""
+                    SELECT
+                        id,
+                        incident_type,
+                        status,
+                        description,
+                        started_at,
+                        resolved_at,
+                        root_cause,
+                        resolution
+                    FROM incidents
+                    ORDER BY started_at DESC
+                """)
+
+                rows = cur.fetchall()
+
+                incidents = []
+
+                for row in rows:
+
+                    incidents.append({
+                        "id": row[0],
+                        "incident_type": row[1],
+                        "status": row[2],
+                        "description": row[3],
+                        "started_at": (
+                            row[4].isoformat()
+                            if row[4]
+                            else None
+                        ),
+                        "resolved_at": (
+                            row[5].isoformat()
+                            if row[5]
+                            else None
+                        ),
+                        "root_cause": row[6],
+                        "resolution": row[7],
+                    })
+
+        return jsonify(
+            incidents
+        ), 200
+
+    except Exception as e:
+
+        print(type(e).__name__)
+        print(e)
+
+        return jsonify({
+            "error": "Failed to fetch incidents",
+            "detail": str(e)
+        }), 500
 
 
 # ============================================================
