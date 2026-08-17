@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - main
-
+    paths:
+      - "cloud-portfolio/**"
+      
 permissions:
   contents: read
   id-token: write
