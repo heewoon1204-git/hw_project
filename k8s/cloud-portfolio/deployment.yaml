@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: cloud-portfolio
+  namespace: application
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: cloud-portfolio
+
+  template:
+    metadata:
+      labels:
+        app: cloud-portfolio
+
+    spec:
+      containers:
+        - name: cloud-portfolio
+
+          image: 245067526307.dkr.ecr.ap-northeast-2.amazonaws.com/cloud-portfolio:cc900d7efd7ac0effeeb0aecedd2e76ee0192bd1
+
+          ports:
+            - containerPort: 5001
+              protocol: TCP
+
+          envFrom:
+            - secretRef:
+                name: cloud-portfolio-db
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+
+            limits:
+              cpu: 500m
+              memory: 512Mi
